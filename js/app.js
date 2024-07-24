@@ -1,9 +1,9 @@
 let carrinhoCompras = [];
 let produtoSelecionado = document.getElementById('produto').value;
-
-
+let itemCarrinho = document.createElement('div');
 
 function adicionar() {
+    let textoInicial = document.getElementById('texto-inicial-carrinho');
     let quantidade = parseInt(document.getElementById('quantidade').value);
     let produtoSelecionado = document.getElementById('produto').value;
 
@@ -17,7 +17,9 @@ function adicionar() {
         itensRepetidos(produtoSelecionado, quantidade);
     }
 
-    console.log(carrinhoCompras);
+    if (textoInicial) {
+        textoInicial.remove();
+    }
 
     itensCarrinho();
 }
@@ -27,11 +29,9 @@ function itensCarrinho() {
     let itemCarrinho = document.createElement('div');
     let itemProduto = document.createElement('span');
     let itemUnidade = document.createElement('span');
-    let textoInicial = document.getElementById('texto-inicial-carrinho');
-
-    removerItens(textoInicial, itemCarrinho);
 
     itemUnidade.classList.add('texto-azul');
+    itemCarrinho.classList.add('produto-carrinho')
     itemCarrinho.id = 'item-carrinho';
 
     for (let i = 0; i < carrinhoCompras.length; i++) {
@@ -43,17 +43,6 @@ function itensCarrinho() {
 
     console.log('ok')
     sectionCarrinho.appendChild(itemCarrinho);
-}
-
-function removerItens(textoInicial, itemCarrinho) {
-
-    if (textoInicial) {
-        textoInicial.remove();
-    }
-
-    if (itemCarrinho) {
-        itemCarrinho.remove();
-    }
 }
 
 
@@ -75,6 +64,21 @@ function itensRepetidos(produtoSelecionado, quantidade) {
 
 function limpar() {
     let quantidade = parseInt(document.getElementById('quantidade').value = 1);
-    carrinhoCompras = []; 
-    console.log(carrinhoCompras = []);
+    let listaDeProdutos = document.getElementById('carrinho-box');
+    let textoFinal = document.createElement('span');
+    textoFinal.id = 'texto-inicial-carrinho';
+
+    if (carrinhoCompras.length > 0) {
+        carrinhoCompras = [];
+    }
+
+
+    while (listaDeProdutos.firstChild) {
+        listaDeProdutos.removeChild(listaDeProdutos.firstChild);
+    }
+
+    textoFinal.textContent = "Carrinho vazio";
+    listaDeProdutos.appendChild(textoFinal);
+    console.log(listaDeProdutos);
+
 }
