@@ -1,17 +1,27 @@
 function adicionar() {
-//recuperar valores: nome do produto, quantidade, valor e texto inicial;
-let textoInicial = document.getElementById('texto-inicial-carrinho').textContent;
-let quantidade = document.getElementById('quantidade').value;
-let produto = document.getElementById('produto').value;
-let nomeProduto = produto.split('-')[0];
-let valorProduto = produto.split('$')[1];
-//adicionar os valores no carrinho;
-//calcular o subtotal;
-//calcular o totalFinal;
-//remover o textoInicial;
+    let valorTotalFinal = document.getElementById('valor-total').textContent;
+    let textoInicial = document.getElementById('texto-inicial-carrinho');
+    let quantidade = document.getElementById('quantidade').value;
+    let produto = document.getElementById('produto').value;
+    let nomeProduto = produto.split('-')[0];
+    let valorProduto = produto.split('$')[1];
+    let subtotal = quantidade * valorProduto;
 
-// console.log(valorProduto); tudo conferido!
+    let textoSubtotal = 'R$' + subtotal;
+
+    if (textoInicial) {
+        textoInicial.remove();
+    }
+
+    let carrinho = document.getElementById('lista-produtos');
+    carrinho.innerHTML = carrinho.innerHTML + `<div class="carrinho__produtos__produto">
+    <span class="texto-azul"> ${quantidade}x </span> ${nomeProduto} <span class="texto-azul">${textoSubtotal}</span>
+    </div>`;
+
+    valorTotalFinal.textContent = subtotal + subtotal;
+    console.log(valorTotalFinal)
 }
+
 
 function limpar() {
 
